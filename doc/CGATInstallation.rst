@@ -13,9 +13,32 @@ installed.
 
 Quick installation
 ==================
+Install using conda
+-------------------
 
-Pre-install dependencies
-------------------------
+The preferred methiod for installation of the CGAT code collection is using the CGAT conda channel.
+
+Before you install, please make sure you have conda installed on your machine, if this is installed all you need to do is to type::
+
+        # add cgat channel
+        conda config --add channels cgat
+
+        # install CGAT code in Conda's root environment
+        conda install <cgat-package>
+
+where ``<cgat-package>`` can be one of these:
+
+* ``cgat-scripts``
+
+* ``cgat-scripts-lite``
+
+To install the development version of the code please follow instructions here_.
+
+
+Install using pip
+-----------------
+
+The non preferred method for installation is through pip, however a number of dependancies need to be installed before the code collection will work. This is the reason we suggest you install using conda.
 
 Installing CGAT can be straight-forward if all its dependencies are satisfied::
 
@@ -175,3 +198,4 @@ resource.
 
 .. _setuptools: https://pypi.python.org/pypi/setuptools
 .. _biopython: http://biopython.org/
+.. _here: CGATInstallationLinux.html
