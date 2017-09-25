@@ -379,8 +379,8 @@ echo "- python"
 
 # Add others manually:
 echo "- cython" >> ${TMP_DEPS}
-echo "- nose" >> ${TMP_DEPS}
-echo "- pep8" >> ${TMP_DEPS}
+[[ ${ALL} -eq 1 ]] && echo "- nose" >> ${TMP_DEPS}
+[[ ${ALL} -eq 1 ]] && echo "- pep8" >> ${TMP_DEPS}
 echo "- setuptools" >> ${TMP_DEPS}
 echo "- pyyaml" >> ${TMP_DEPS}
 
@@ -452,8 +452,8 @@ done
 
 # Add these manually, as they are required but don't use the 'statement' variable to run them
 echo "- ucsc-wigtobigwig" >> ${TMP_DEPS}
-echo "- ucsc-bedtobigbed" >> ${TMP_DEPS}
-echo "- ucsc-bedgraphtobigwig" >> ${TMP_DEPS}
+[[ ${ALL} -eq 1 ]] && echo "- ucsc-bedtobigbed" >> ${TMP_DEPS}
+[[ ${ALL} -eq 1 ]] && echo "- ucsc-bedgraphtobigwig" >> ${TMP_DEPS}
 echo "- nomkl" >> ${TMP_DEPS}
 echo "- gcc" >> ${TMP_DEPS}
 echo "- zlib" >> ${TMP_DEPS}

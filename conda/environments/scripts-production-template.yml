@@ -1,0 +1,38 @@
+
+name: cgat-s
+
+channels:
+- bioconda
+- conda-forge
+- defaults
+
+dependencies:
+# python dependencies
+- python
+- alignlib-lite
+- biopython
+- cython
+- future
+- matplotlib
+- numpy
+- pandas
+- pybedtools
+- pysam
+- python-lzo
+- pyyaml
+- rpy2
+- scipy
+- setuptools
+- six
+- pip:
+  - bx-python
+# Misc dependencies
+- bedtools
+- coreutils
+- gcc
+- grep
+- libpng
+- nomkl
+- ucsc-wigtobigwig
+- zlib
+
