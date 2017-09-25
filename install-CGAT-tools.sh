@@ -22,7 +22,12 @@ set -o pipefail
 
 set -o errtrace
 
+SCRIPT_NAME="$0"
+SCRIPT_PARAMS="$@"
+
 error_handler() {
+   echo
+   echo " ########################################################## "
    echo
    echo " An error occurred in:"
    echo
@@ -32,12 +37,14 @@ error_handler() {
    shift
    echo " - command: ${@}"
    echo
-   echo " The installation did not finish properly. "
+   echo " The script will abort now. User input was: "
+   echo
+   echo " ${SCRIPT_NAME} ${SCRIPT_PARAMS}"
    echo
    echo " Please copy and paste this error and report it via Git Hub: "
    echo " https://github.com/CGATOxford/cgat/issues "
-   echo
    print_env_vars
+   echo " ########################################################## "
 }
 
 trap 'error_handler ${LINENO} $? ${BASH_COMMAND}' ERR INT TERM
@@ -382,9 +389,9 @@ if [[ $TRAVIS_INSTALL ]] || [[ $JENKINS_INSTALL ]] ; then
 else
 
    source $CONDA_INSTALL_DIR/bin/activate $CONDA_INSTALL_ENV
-   conda list | grep cgat-scripts > /dev/null
+   RET=$( (conda list | grep cgat-scripts) || true )
 
-   if [[ $? -eq 1 ]] ; then
+   if [[ -z "${RET}" ]] ; then
       # this is "cgat-devel" so tests can be run
 
       # make sure you are in the CGAT_HOME/cgat-scripts folder
