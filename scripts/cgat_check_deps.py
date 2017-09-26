@@ -45,7 +45,6 @@ import sys
 import re
 import ast
 import argparse
-import subprocess
 
 
 def checkDepedencies(pipeline):
