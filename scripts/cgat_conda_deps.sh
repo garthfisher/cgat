@@ -36,7 +36,7 @@ PY_DEPS[MySQLdb]="mysqlclient"
 PY_DEPS[SphinxReport]="ignore"
 PY_DEPS[alignlib_lite]="alignlib-lite"
 PY_DEPS[bs4]="beautifulsoup4"
-PY_DEPS[bx]="ignore"
+PY_DEPS[bx]="bx-python"
 PY_DEPS[configparser]="ignore"
 PY_DEPS[drmaa]="python-drmaa"
 PY_DEPS[future]="future"
@@ -390,11 +390,8 @@ echo "- setuptools" >> ${TMP_DEPS}
 echo "- pyyaml" >> ${TMP_DEPS}
 
 # Print them all sorted
-sort -u ${TMP_DEPS}
-
-# Add bx-python from PyPI at the end
-echo "- pip:"
-echo "  - bx-python"
+sed 's/^- bx-python/# WARNING: bx-python is Py2 only but "pip install bx-python" works with Py3/g' ${TMP_DEPS} \
+ | sort -u
 
 
 ### process R deps ###
