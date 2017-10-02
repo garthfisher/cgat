@@ -946,6 +946,11 @@ class Entry:
             self.transcript_id = transcript_id
         else:
             self.transcript_id = other.transcript_id
+        if self.frame is None:
+            self.frame = "."
+        if self.strand is None:
+            self.strand = "."
+
         return self
 
     def fromBed(self, other, **kwargs):
@@ -976,6 +981,11 @@ class Entry:
         self.score = other.score
         self.strand = other.strand
         self.frame = other.frame
+        if self.frame is None:
+            self.frame = "."
+        if self.strand is None:
+            self.strand = "."
+
         # gene_id and transcript_id can be optional
         try:
             self.gene_id = other.gene_id
