@@ -1264,7 +1264,7 @@ def main(argv=None):
                             transcript_dict[gtf.transcript_id] + 1
                         # TS. patch until pysam.ctabixproxies.pyx bugfixed
                         gtf.attributes = gtf.attributes.strip()
-                        gtf.transcript_id = str(gtf.transcript_id) + "." + str(transcript_dict[gtf.transcript_id]))
+                        gtf.transcript_id = str(gtf.transcript_id) + "." + str(transcript_dict[gtf.transcript_id])
 
             options.stdout.write("%s\n" % gtf)
 
