@@ -1264,7 +1264,7 @@ def main(argv=None):
                             transcript_dict[gtf.transcript_id] + 1
                         # TS. patch until pysam.ctabixproxies.pyx bugfixed
                         gtf.attributes = gtf.attributes.strip()
-                        gtf.transcript_id = str(gtf.transcript_id) + "." + str(transcript_dict[gtf.transcript_id]))
+                        gtf.transcript_id = str(gtf.transcript_id) + "." + str(transcript_dict[gtf.transcript_id])
 
             options.stdout.write("%s\n" % gtf)
 
@@ -1282,6 +1282,8 @@ def main(argv=None):
             strands = set([x.strand for x in gffs])
             contigs = set([x.contig for x in gffs])
             if len(strands) > 1:
+                E.warn('Skipping gene %s on multiple strands' % gffs[0].gene_id)
+                break
                 raise ValueError(
                     "can not merge gene '%s' on multiple strands: %s" % (
                         gffs[0].gene_id, str(strands)))
