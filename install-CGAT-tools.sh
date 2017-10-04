@@ -94,7 +94,7 @@ else
       CGAT_HOME=$HOME/cgat-install
    fi
 
-   if [[ $INSTALL_SCRIPTS ]] ; then
+   if [[ $INSTALL_PRODUCTION ]] ; then
       CONDA_INSTALL_TYPE="cgat-scripts"
    elif [[ $INSTALL_DEVEL ]] ; then
       CONDA_INSTALL_TYPE="scripts-devel.yml"
@@ -237,7 +237,7 @@ log "installing CGAT environment"
 # Now using conda environment files:
 # https://conda.io/docs/using/envs.html#use-environment-from-file
 
-if [[ $INSTALL_SCRIPTS ]] ; then
+if [[ $INSTALL_PRODUCTION ]] ; then
    conda create -q -n ${CONDA_INSTALL_ENV} cgat-scripts gcc rpy2=2.8.5 --override-channels -c bioconda -c conda-forge -c defaults -y
 else
    [[ -z ${TRAVIS_BRANCH} ]] && TRAVIS_BRANCH=${INSTALL_BRANCH}
@@ -324,7 +324,7 @@ if [[ "$OS" != "travis" ]] ; then
       echo
       echo " To activate the CGAT environment type: "
       echo " $ source $CONDA_INSTALL_DIR/bin/activate $CONDA_INSTALL_ENV"
-      [[ $INSTALL_SCRIPTS ]] && echo " cgat --help"
+      [[ $INSTALL_PRODUCTION ]] && echo " cgat --help"
       echo
       echo " To deactivate the environment, use:"
       echo " $ source deactivate"
@@ -518,17 +518,17 @@ echo
 echo " If you only need to use the scripts published here:"
 echo "   https://www.ncbi.nlm.nih.gov/pubmed/24395753"
 echo " type:"
-echo " ./install-CGAT-tools.sh --cgat-scripts [--location </full/path/to/folder/without/trailing/slash>]"
+echo " ./install-CGAT-tools.sh --production [--location </full/path/to/folder/without/trailing/slash>]"
 echo
 echo " The default location is: $HOME/cgat-install"
 echo
 echo " Otherwise, if you prefer to use the latest development version of the scripts instead, type:"
-echo " ./install-CGAT-tools.sh --cgat-devel [--location </full/path/to/folder/without/trailing/slash>]"
+echo " ./install-CGAT-tools.sh --devel [--location </full/path/to/folder/without/trailing/slash>]"
 echo
 echo " Both installations create a new Conda environment ready to run the CGAT code."
 echo
 echo " It is also possible to install/test a specific branch of the code on github:"
-echo " ./install-CGAT-tools.sh --cgat-devel --branch <name-of-branch> [--location </full/path/to/folder/without/trailing/slash>]"
+echo " ./install-CGAT-tools.sh --devel --branch <name-of-branch> [--location </full/path/to/folder/without/trailing/slash>]"
 echo
 echo " To test the installation:"
 echo " ./install-CGAT-tools.sh --test [--location </full/path/to/folder/without/trailing/slash>]"
@@ -560,7 +560,7 @@ TRAVIS_INSTALL=
 # jenkins testing
 JENKINS_INSTALL=
 # conda installation type
-INSTALL_SCRIPTS=
+INSTALL_PRODUCTION=
 INSTALL_DEVEL=
 # test current installation
 INSTALL_TEST=
@@ -605,12 +605,12 @@ case $key in
     shift
     ;;
 
-    --cgat-scripts)
-    INSTALL_SCRIPTS=1
+    --production)
+    INSTALL_PRODUCTION=1
     shift
     ;;
 
-    --cgat-devel)
+    --devel)
     INSTALL_DEVEL=1
     shift
     ;;
@@ -649,9 +649,9 @@ esac
 done
 
 # sanity checks
-if [[ $INSTALL_SCRIPTS ]] && [[ $INSTALL_DEVEL ]] ; then
+if [[ $INSTALL_PRODUCTION ]] && [[ $INSTALL_DEVEL ]] ; then
    echo
-   echo " Incorrect input arguments: mixing --cgat-scripts and --cgat-devel is not permitted."
+   echo " Incorrect input arguments: mixing --production and --devel is not permitted."
    echo " Installation aborted. Please run -h option."
    echo
    exit 1
@@ -671,7 +671,7 @@ elif [[ $JENKINS_INSTALL  ]] ; then
 
 else 
 
-  if [[ $INSTALL_SCRIPTS ]] || [[ $INSTALL_DEVEL ]] ; then
+  if [[ $INSTALL_PRODUCTION ]] || [[ $INSTALL_DEVEL ]] ; then
      conda_install
   fi
 
