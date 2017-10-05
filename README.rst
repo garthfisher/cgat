@@ -31,7 +31,7 @@ The CGAT tools can be installed from pypi::
    pip install cgat
 
 More advanced installation options are explained
-`here <https://www.cgat.org/downloads/public/cgat/documentation/CGATInstallation.html>_`.
+`here <https://www.cgat.org/downloads/public/cgat/documentation/CGATInstallation.html>`_.
 
 To use CGAT Tools, use the ``cgat --help`` command. For example, to
 strip sequence and quality information from a bam_ file, type:
